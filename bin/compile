@@ -17,7 +17,7 @@ ENV_DIR=$3
 BUILDPACK_DIR=$(cd "$(dirname "$0")"; cd ..; pwd)
 
 # Set pinned version
-PINNED_VERSION="0.43.0"
+PINNED_VERSION="0.97.0"
 
 # If a version hasn't been specified, use the pinned version
 if [ -f "$ENV_DIR/OTELCOL_VERSION" ]; then
@@ -26,14 +26,7 @@ else
   VERSION="$PINNED_VERSION"
 fi
 
-OTELCOL_BINARY="otelcol"
-# If the user hasn't request otelcol-contrib explicetely, use core
-if [ -f "$ENV_DIR/OTELCOL_CONTRIB" ]; then
-  OTELCOL_CONTRIB=$(cat "$ENV_DIR/OTELCOL_CONTRIB")
-  if [ "$OTELCOL_CONTRIB" == "true" ]; then
-    OTELCOL_BINARY="otelcol-contrib"
-  fi
-fi
+OTELCOL_BINARY="otelcol-contrib"
 
 # Download
 if [ ! -f "$CACHE_DIR/${OTELCOL_BINARY}-${VERSION}" ] || [ -n "$NOCACHE_OTELCOL" ]; then
