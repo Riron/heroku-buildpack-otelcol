@@ -17,7 +17,7 @@ ENV_DIR=$3
 BUILDPACK_DIR=$(cd "$(dirname "$0")"; cd ..; pwd)
 
 # Set pinned version
-PINNED_VERSION="0.97.0"
+PINNED_VERSION="0.99.0"
 
 # If a version hasn't been specified, use the pinned version
 if [ -f "$ENV_DIR/OTELCOL_VERSION" ]; then
@@ -44,8 +44,8 @@ fi
 mkdir -p "$BUILD_DIR/bin"
 cp "$CACHE_DIR/${OTELCOL_BINARY}-${VERSION}" "$BUILD_DIR/bin/otelcol"
 
-# Install the runner
-echo "-----> Installing OpenTelemetry Collector runner"
+# Install prescript
+echo "-----> Installing OpenTelemetry Collector prescript"
 mkdir -p "$BUILD_DIR/.profile.d"
 cp "$BUILDPACK_DIR/extra/otelcol.sh" "$BUILD_DIR/.profile.d/"
 chmod +x "$BUILD_DIR/.profile.d/otelcol.sh"
